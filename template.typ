@@ -1,8 +1,26 @@
 #import "@preview/oxifmt:0.2.0": strfmt
-#import "@local/svg-emoji:0.1.0": setup-emoji
+
+#let fontsize = (
+  初号: 42pt,
+  小初: 36pt,
+  一号: 26pt,
+  小一: 24pt,
+  二号: 22pt,
+  小二: 18pt,
+  三号: 16pt,
+  小三: 15pt,
+  四号: 14pt,
+  中四: 13pt,
+  小四: 12pt,
+  五号: 10.5pt,
+  小五: 9pt,
+  六号: 7.5pt,
+  小六: 6.5pt,
+  七号: 5.5pt,
+  小七: 5pt,
+)
 
 #let project(title: "", authors: (), body) = {
-  show: setup-emoji
   // Set the document's basic properties.
   set document(author: authors.map(a => a.name), title: title)
   set page(
@@ -10,10 +28,32 @@
     margin: 1.5cm,
   )
   set text(font: (
-    "Source Han Sans SC",
-  ), lang: "zh")
-  // set heading(numbering: "1.1")
-  set par(justify: true)
+    "Times New Roman",
+    "SimSun",
+  ), size: fontsize.五号, lang: "zh")
+  set heading(numbering: (..nums) => {
+    if nums.pos().len() == 1 {
+      ("零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十").at(nums.pos().first()) + "、"
+    } else if nums.pos().len() == 2 {
+      strfmt("{}.", nums.pos().at(1))
+    } else if nums.pos().len() == 3 {
+      strfmt("({})", nums.pos().at(2))
+    }
+  })
+  show heading: it => {
+    if it.level == 1 {
+      set text(size: fontsize.小四, font: "SimHei", weight: "bold")
+      it
+    } else if it.level == 2 {
+      set text(size: fontsize.五号, weight: "bold")
+      it
+    } else {
+      set text(size: fontsize.五号, weight: "regular")
+      it
+    }
+    par()[#text(size:0.5em)[#h(0.0em)]] // 让第一段也首行缩进
+  }
+  set par(justify: true, first-line-indent: 2em)
 
   let link_color(color) = {
     (it) => {
@@ -36,7 +76,7 @@
     inset: 10pt,
     radius: 4pt,
   )
-  show raw: set text(font: "CodeNewRoman Nerd Font")
+  show raw: set text(font: "Noto Sans Mono")
 
   show math.equation.where(block: false): eq => {
     if eq.body.has("size") and eq.body.size == "display" { eq } else { $display(eq)$ }
@@ -48,25 +88,8 @@
   
   // Title row.
   align(center)[
-    #block(text(weight: 700, 1.75em, title))
+    #block(text(size: fontsize.小二, font: "FangSong", weight: "bold", title))
   ]
-
-  // Author information.
-  pad(
-    top: 0.5em,
-    bottom: 0.5em,
-    x: 2em,
-    grid(
-      columns: (1fr,) * calc.min(3, authors.len()),
-      gutter: 1em,
-      ..authors.map(author => align(center)[
-        #author.name
-        // *#author.name* \
-        // #author.email \
-        // #author.affiliation
-      ]),
-    ),
-  )
 
   body
 }
