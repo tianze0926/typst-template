@@ -36,7 +36,10 @@
     inset: 10pt,
     radius: 4pt,
   )
-  show raw: set text(font: "CodeNewRoman Nerd Font")
+  show raw: set text(font: (
+    "CodeNewRoman Nerd Font",
+    "Source Han Mono SC",
+  ))
 
   show math.equation.where(block: false): eq => {
     if eq.body.has("size") and eq.body.size == "display" { eq } else { $display(eq)$ }
