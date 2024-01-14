@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text">
+
+  <info>
+    <id>c2d21f4f-e411-4c5a-bf6d-2954ce99ad38</id>
+    <title>Raw</title>
+  </info>
+
+  <citation et-al-min="2" et-al-use-first="1">
+    <layout>
+      <names variable="author"/>
+    </layout>
+  </citation>
+
+  <locale xml:lang="en">
+    <terms>
+      <term name="et-al">
+        等人
+      </term>
+    </terms>
+  </locale>
+
+  <bibliography second-field-align="flush">
+    <layout>
+      <text variable="citation-number" prefix="[" suffix="]"/>
+      <text variable="note"/>
+    </layout>
+  </bibliography>
+
+</style>

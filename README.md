@@ -19,4 +19,32 @@
 
 ## Bibliography
 
-因本人写作时 Typst 对 GB/T 7714 引用的支持不佳 (https://github.com/typst/typst/issues/2548) ，本模板提供了一种手动添加格式化后的引用的方法（见 `refs.yml`），能较好地支持知网等国内平台（知网的 GB/T 7714 引用的信息比 BibTex 格式的更加丰富）。
+两种方式：
+
+### Raw
+
+`refs.yml` 和 `raw.csl` 搭配：
+
+```typst
+#bibliography("refs.yml", title: text(
+  size: fontsize.五号,
+  font: "SimSun",
+  weight: "bold",
+)[参考文献], style: "raw.csl")
+```
+
+可较好地支持知网等国内平台（知网的 GB/T 7714 引用的信息比 BibTex 格式的更加丰富）。
+
+### Regular
+
+可使用 BibTex 或 yml：
+
+```typst
+#bibliography("refs.bib", title: text(
+  size: fontsize.五号,
+  font: "SimHei",
+)[参考文献], style: "gb-7714-2015-numeric")
+```
+
+- `#citet("label_name")`：模拟 LaTex 中的 `\citet{}`
+

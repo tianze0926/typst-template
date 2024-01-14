@@ -5,9 +5,10 @@
 )
 
 
-#bibliography("refs.yml", title: text(
+#text(lang: "en")[
+#bibliography("refs.bib", title: text(
   size: fontsize.五号,
-  font: "SimSun",
-  weight: "bold",
-)[参考文献], style: "raw.csl")
+  font: "SimHei",
+)[参考文献], style: "gb-7714-2015-numeric")
+]
 

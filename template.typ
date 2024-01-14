@@ -103,3 +103,13 @@
   radius: 4pt,
   icon + h(0.5em) + if title.len() != 0 { strong(title) + v(0.25em) } + content,
 )
+
+#let citet(l) = [
+  #set text(lang: "en") // 否则姓氏都为大写
+  #cite(
+    label(l),
+    style: "citet.csl",
+  )
+  #h(0.25em)
+  #cite(label(l))
+]
